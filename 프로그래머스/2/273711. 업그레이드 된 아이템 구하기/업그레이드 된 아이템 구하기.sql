@@ -1,0 +1,20 @@
+-- 코드를 작성해주세요
+SELECT DISTINCT
+    c.ITEM_ID,
+    c.ITEM_NAME,
+    c.RARITY
+FROM
+    ITEM_TREE t
+INNER JOIN
+    ITEM_INFO c
+    ON
+    c.ITEM_ID = t.ITEM_ID
+LEFT JOIN
+    ITEM_INFO p
+    ON
+    p.ITEM_ID = t.PARENT_ITEM_ID
+WHERE
+    p.RARITY = 'RARE'
+ORDER BY
+    c.ITEM_ID DESC
+;

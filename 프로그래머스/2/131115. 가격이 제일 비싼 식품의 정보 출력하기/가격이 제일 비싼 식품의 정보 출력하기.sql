@@ -1,4 +1,11 @@
 -- 코드를 입력하세요
+SET @MAX_PRICE = (
+    SELECT
+        MAX(PRICE)
+    FROM
+        FOOD_PRODUCT
+);
+
 SELECT
     PRODUCT_ID,
     PRODUCT_NAME,
@@ -7,8 +14,6 @@ SELECT
     PRICE
 FROM
     FOOD_PRODUCT
-ORDER BY
-    PRICE DESC
-LIMIT
-    1
+WHERE
+    PRICE = @MAX_PRICE
 ;

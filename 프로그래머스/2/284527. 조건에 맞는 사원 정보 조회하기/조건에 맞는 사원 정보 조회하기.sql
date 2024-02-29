@@ -1,0 +1,40 @@
+WITH MAX_SCORE_TABLE AS (
+    SELECT
+        SUM(SCORE) AS SCORE
+    FROM
+        HR_GRADE
+    GROUP BY
+        EMP_NO
+    ORDER BY
+        SCORE DESC
+    LIMIT
+        1
+),
+
+SCORE_TABLE AS (
+    SELECT
+        SUM(G.SCORE) AS SCORE,
+        G.EMP_NO,
+        E.EMP_NAME,
+        E.POSITION,
+        E.EMAIL
+    FROM
+        HR_GRADE AS G
+    INNER JOIN
+        HR_EMPLOYEES AS E ON G.EMP_NO = E.EMP_NO
+    GROUP BY
+        G.EMP_NO
+)
+
+SELECT
+    S.SCORE,
+    S.EMP_NO,
+    S.EMP_NAME,
+    S.POSITION,
+    S.EMAIL
+FROM
+    SCORE_TABLE AS S,
+    MAX_SCORE_TABLE AS M
+WHERE
+    S.SCORE = M.SCORE
+;

@@ -1,21 +1,15 @@
-#include <string>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 
 using namespace std;
 
 int solution(vector<int> citations) {
     sort(citations.begin(), citations.end(), greater<int>());
     
-    for (int h = citations[0]; h > 0; h--) {
-        int cnt = 0;
-        while (cnt < citations.size() && citations[cnt] >= h) {
-            cnt++;
-        }
-        if (cnt >= h) {
-            return h;
+    for (int i = 0; i < citations.size(); i++) {
+        if (citations[i] < i + 1) {
+            return i;
         }
     }
     
-    return 0;
+    return citations.size();
 }
